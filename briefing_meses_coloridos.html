@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing — Meses Coloridos | Revenda Solimões</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #0f2d52;
+    --laranja: #f47920;
+    --amarelo-claro: #fff8ee;
+    --cinza-claro: #f5f5f3;
+    --cinza-borda: #e0ddd8;
+    --texto: #1a1a1a;
+    --texto-leve: #6b6b6b;
+    --branco: #ffffff;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cinza-claro);
+    color: var(--texto);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+
+  .topo {
+    max-width: 820px;
+    margin: 0 auto 36px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .logo-box {
+    background: var(--azul);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 90px;
+  }
+
+  .logo-s {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--laranja);
+    line-height: 1;
+  }
+
+  .logo-sub {
+    font-size: 9px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .topo-texto h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--azul);
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  .topo-texto p {
+    font-size: 13px;
+    color: var(--texto-leve);
+    margin-top: 4px;
+  }
+
+  .cor-preview {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--texto-leve);
+  }
+
+  .cor-circulo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--cinza-borda);
+    transition: background 0.3s;
+  }
+
+  .form-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--branco);
+    border: 1px solid var(--cinza-borda);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .card-header {
+    background: var(--azul);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--laranja);
+    min-width: 28px;
+  }
+
+  .card-titulo {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--branco);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .card-body {
+    padding: 20px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  @media (max-width: 600px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .campo label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--texto-leve);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .campo input,
+  .campo textarea,
+  .campo select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--texto);
+    background: var(--cinza-claro);
+    border: 1px solid var(--cinza-borda);
+    border-radius: 6px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border 0.2s, background 0.2s;
+    width: 100%;
+    resize: vertical;
+  }
+
+  .campo input:focus,
+  .campo textarea:focus,
+  .campo select:focus {
+    border-color: var(--laranja);
+    background: #fffaf5;
+  }
+
+  .campo textarea { min-height: 80px; line-height: 1.5; }
+  .campo textarea.alto { min-height: 120px; }
+
+  .hint {
+    font-size: 11px;
+    color: var(--texto-leve);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  .dicas-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .dica-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dica-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--laranja);
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .dica-row input {
+    flex: 1;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--texto);
+    background: var(--cinza-claro);
+    border: 1px solid var(--cinza-borda);
+    border-radius: 6px;
+    padding: 8px 12px;
+    outline: none;
+    transition: border 0.2s, background 0.2s;
+  }
+
+  .dica-row input:focus {
+    border-color: var(--laranja);
+    background: #fffaf5;
+  }
+
+  .btn-add {
+    align-self: flex-start;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--laranja);
+    background: none;
+    border: 1px dashed var(--laranja);
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 2px;
+  }
+
+  .btn-add:hover { background: #fff3e6; }
+
+  .hashtags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    background: var(--cinza-claro);
+    border: 1px solid var(--cinza-borda);
+    border-radius: 6px;
+    min-height: 44px;
+    cursor: text;
+  }
+
+  .tag {
+    background: var(--azul);
+    color: var(--branco);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .tag-remove {
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0.6;
+    line-height: 1;
+  }
+
+  .tag-remove:hover { opacity: 1; }
+
+  .tag-fixa { background: var(--laranja); }
+
+  .tag-input {
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    min-width: 120px;
+    color: var(--texto);
+  }
+
+  .pecas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  @media (max-width: 600px) { .pecas-grid { grid-template-columns: 1fr 1fr; } }
+
+  .peca-item {
+    border: 1px solid var(--cinza-borda);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border 0.2s;
+  }
+
+  .peca-item:has(input:checked) {
+    border-color: var(--laranja);
+    background: #fffaf5;
+  }
+
+  .peca-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .peca-check input[type=checkbox] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--laranja);
+    cursor: pointer;
+  }
+
+  .peca-nome {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto);
+  }
+
+  .peca-dim {
+    font-size: 11px;
+    color: var(--texto-leve);
+  }
+
+  .rodape-btns {
+    max-width: 820px;
+    margin: 28px auto 0;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+
+  .btn-limpar {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--texto-leve);
+    background: var(--branco);
+    border: 1px solid var(--cinza-borda);
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-limpar:hover { background: var(--cinza-claro); }
+
+  .btn-gerar {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--branco);
+    background: var(--laranja);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .btn-gerar:hover { background: #d9681a; }
+  .btn-gerar:active { transform: scale(0.98); }
+
+  /* RESUMO */
+  .resumo-wrap {
+    max-width: 820px;
+    margin: 28px auto 0;
+    background: var(--branco);
+    border: 1px solid var(--cinza-borda);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: none;
+  }
+
+  .resumo-header {
+    background: var(--laranja);
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .resumo-header span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--branco);
+    letter-spacing: 0.05em;
+  }
+
+  .btn-copiar {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--laranja);
+    background: var(--branco);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+  }
+
+  .resumo-body {
+    padding: 22px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--texto);
+    white-space: pre-wrap;
+    font-family: 'DM Sans', monospace;
+  }
+
+  .resumo-body strong { color: var(--azul); }
+
+  .cor-faixa {
+    height: 5px;
+    transition: background 0.4s;
+    border-radius: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="topo">
+  <div class="logo-box">
+    <div class="logo-s">S</div>
+    <div class="logo-sub">Revenda<br>Solimões</div>
+  </div>
+  <div class="topo-texto">
+    <h1>Briefing — Meses Coloridos</h1>
+    <p>Preencha os campos abaixo para montar o briefing completo da campanha</p>
+  </div>
+  <div class="cor-preview">
+    <span>Cor da campanha</span>
+    <div class="cor-circulo" id="corPreview"></div>
+  </div>
+</div>
+
+<div id="corFaixa" class="cor-faixa" style="max-width:820px;margin:0 auto 20px;border-radius:6px;"></div>
+
+<div class="form-wrap">
+
+  <!-- 1. IDENTIDADE -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">01</span>
+      <span class="card-titulo">Identidade da Campanha</span>
+    </div>
+    <div class="card-body grid-2">
+      <div class="campo">
+        <label>Mês</label>
+        <select id="mes">
+          <option value="">Selecione o mês</option>
+          <option>Janeiro</option><option>Fevereiro</option><option>Março</option>
+          <option>Abril</option><option>Maio</option><option>Junho</option>
+          <option>Julho</option><option>Agosto</option><option>Setembro</option>
+          <option>Outubro</option><option>Novembro</option><option>Dezembro</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Nome da campanha</label>
+        <input type="text" id="nomeCampanha" placeholder="Ex: Maio Amarelo">
+      </div>
+      <div class="campo">
+        <label>Cor oficial (hex)</label>
+        <input type="color" id="corCampanha" value="#f5c518" style="height:42px;padding:4px 8px;cursor:pointer;">
+      </div>
+      <div class="campo">
+        <label>Causa / tema</label>
+        <input type="text" id="causa" placeholder="Ex: Acidente de trânsito">
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. TEXTOS CONCEITUAIS -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">02</span>
+      <span class="card-titulo">Textos Conceituais</span>
+    </div>
+    <div class="card-body">
+      <div class="campo">
+        <label>Mote</label>
+        <input type="text" id="mote" placeholder="Frase curta e marcante — Ex: No trânsito, sua escolha faz a diferença">
+      </div>
+      <div class="campo">
+        <label>Chamada principal</label>
+        <input type="text" id="chamada" placeholder="Ex: Atenção no trânsito salva vidas.">
+      </div>
+      <div class="campo">
+        <label>Assinatura conceitual</label>
+        <input type="text" id="assinatura" placeholder="Ex: Trânsito seguro começa com atitudes seguras.">
+      </div>
+      <div class="campo">
+        <label>Frase de apoio</label>
+        <input type="text" id="fraseApoio" placeholder="Ex: Respeito às regras é respeito à vida.">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. TEXTO INSTITUCIONAL (BANNER) -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">03</span>
+      <span class="card-titulo">Texto Institucional — Banner 200x70cm</span>
+    </div>
+    <div class="card-body">
+      <div class="campo">
+        <label>Parágrafo institucional</label>
+        <textarea class="alto" id="textoInstitucional" placeholder="Conecte a operação da Revenda à causa. Ex: Durante o Maio Amarelo, reforçamos a importância da atenção e da responsabilidade no trânsito. Nossa operação está diariamente em deslocamento..."></textarea>
+        <span class="hint">Aprox. 2 parágrafos curtos. Fala sobre como a Revenda se relaciona com a causa.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. DICAS DE PREVENÇÃO -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">04</span>
+      <span class="card-titulo">Dicas de Prevenção — Banner e Conteúdo</span>
+    </div>
+    <div class="card-body">
+      <div class="dicas-wrap" id="dicasWrap">
+        <div class="dica-row"><span class="dica-num">1</span><input type="text" placeholder="Ex: Use o cinto de segurança — todos os ocupantes, inclusive no banco traseiro."></div>
+        <div class="dica-row"><span class="dica-num">2</span><input type="text" placeholder="Ex: Ao andar de moto, use sempre o capacete."></div>
+        <div class="dica-row"><span class="dica-num">3</span><input type="text" placeholder="Ex: Não use o celular ao dirigir."></div>
+        <div class="dica-row"><span class="dica-num">4</span><input type="text" placeholder="Ex: Nunca dirija sob efeito de álcool."></div>
+        <div class="dica-row"><span class="dica-num">5</span><input type="text" placeholder="Ex: Faça manutenção preventiva do veículo."></div>
+      </div>
+      <button class="btn-add" onclick="adicionarDica()">+ Adicionar dica</button>
+    </div>
+  </div>
+
+  <!-- 5. LEGENDA DO POST -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">05</span>
+      <span class="card-titulo">Legenda — Post Instagram 1080x1350px</span>
+    </div>
+    <div class="card-body">
+      <div class="campo">
+        <label>Abertura emocional</label>
+        <textarea id="legendaAbertura" placeholder="Ex: Em maio, o amarelo não é só uma cor — é um alerta."></textarea>
+      </div>
+      <div class="campo">
+        <label>Desenvolvimento / conexão com a marca</label>
+        <textarea id="legendaDesenv" placeholder="Ex: Nossa operação percorre mais de 23 municípios todos os dias. Cada motorista, cada rota, cada entrega carrega uma responsabilidade que vai além da carga..."></textarea>
+      </div>
+      <div class="campo">
+        <label>Fechamento / chamada para reflexão</label>
+        <textarea id="legendaFecho" placeholder="Ex: Trânsito seguro começa com atitudes seguras. De cada um de nós."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. HASHTAGS -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">06</span>
+      <span class="card-titulo">Hashtags</span>
+    </div>
+    <div class="card-body">
+      <div class="campo">
+        <label>Hashtags da campanha + institucionais</label>
+        <div class="hashtags-wrap" id="hashtagsWrap" onclick="document.getElementById('tagInput').focus()">
+          <span class="tag tag-fixa">#RevendaSolimões <span class="tag-remove" onclick="event.stopPropagation()">×</span></span>
+          <span class="tag tag-fixa">#Amazonas <span class="tag-remove" onclick="event.stopPropagation()">×</span></span>
+          <span class="tag tag-fixa">#InteriorDoAmazonas <span class="tag-remove" onclick="event.stopPropagation()">×</span></span>
+          <input type="text" id="tagInput" class="tag-input" placeholder="Digite e pressione Enter...">
+        </div>
+        <span class="hint">As tags laranjas são fixas da marca. Adicione as específicas da campanha.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. PEÇAS DO ENXOVAL -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">07</span>
+      <span class="card-titulo">Peças do Enxoval</span>
+    </div>
+    <div class="card-body">
+      <div class="pecas-grid">
+        <div class="peca-item">
+          <label class="peca-check"><input type="checkbox" checked><span class="peca-nome">Peça Conceito</span></label>
+          <span class="peca-dim">Formato livre</span>
+        </div>
+        <div class="peca-item">
+          <label class="peca-check"><input type="checkbox" checked><span class="peca-nome">Wallpaper Desktop</span></label>
+          <span class="peca-dim">1920 × 1080px</span>
+        </div>
+        <div class="peca-item">
+          <label class="peca-check"><input type="checkbox" checked><span class="peca-nome">Wallpaper Mobile</span></label>
+          <span class="peca-dim">1080 × 1920px</span>
+        </div>
+        <div class="peca-item">
+          <label class="peca-check"><input type="checkbox" checked><span class="peca-nome">Banner</span></label>
+          <span class="peca-dim">200 × 70cm</span>
+        </div>
+        <div class="peca-item">
+          <label class="peca-check"><input type="checkbox" checked><span class="peca-nome">Camisa</span></label>
+          <span class="peca-dim">Frente + costas</span>
+        </div>
+        <div class="peca-item">
+          <label class="peca-check"><input type="checkbox" checked><span class="peca-nome">Post Feed</span></label>
+          <span class="peca-dim">1080 × 1350px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. OBSERVAÇÕES -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">08</span>
+      <span class="card-titulo">Observações e Referências</span>
+    </div>
+    <div class="card-body">
+      <div class="campo">
+        <label>Observações gerais</label>
+        <textarea class="alto" id="obs" placeholder="Referências visuais, restrições, contexto especial, alinhamentos com a operação..."></textarea>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="rodape-btns">
+  <button class="btn-limpar" onclick="limparForm()">Limpar tudo</button>
+  <button class="btn-gerar" onclick="gerarResumo()">Gerar resumo do briefing</button>
+</div>
+
+<div class="resumo-wrap" id="resumoWrap">
+  <div class="resumo-header">
+    <span>Resumo do Briefing</span>
+    <button class="btn-copiar" onclick="copiarResumo()">Copiar texto</button>
+  </div>
+  <div class="resumo-body" id="resumoBody"></div>
+</div>
+
+<script>
+  const corInput = document.getElementById('corCampanha');
+  const corPreview = document.getElementById('corPreview');
+  const corFaixa = document.getElementById('corFaixa');
+
+  function atualizarCor() {
+    const c = corInput.value;
+    corPreview.style.background = c;
+    corFaixa.style.background = c;
+  }
+
+  corInput.addEventListener('input', atualizarCor);
+  atualizarCor();
+
+  let dicaCount = 5;
+
+  function adicionarDica() {
+    dicaCount++;
+    const wrap = document.getElementById('dicasWrap');
+    const row = document.createElement('div');
+    row.className = 'dica-row';
+    row.innerHTML = `<span class="dica-num">${dicaCount}</span><input type="text" placeholder="Nova dica...">`;
+    wrap.appendChild(row);
+  }
+
+  // Hashtags
+  const tagInput = document.getElementById('tagInput');
+  const hashtagsWrap = document.getElementById('hashtagsWrap');
+
+  tagInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      const val = tagInput.value.trim().replace(/^#/, '');
+      if (!val) return;
+      const tag = document.createElement('span');
+      tag.className = 'tag';
+      tag.innerHTML = `#${val} <span class="tag-remove" onclick="this.parentElement.remove()">×</span>`;
+      hashtagsWrap.insertBefore(tag, tagInput);
+      tagInput.value = '';
+    }
+  });
+
+  function getDicas() {
+    return Array.from(document.querySelectorAll('#dicasWrap .dica-row input'))
+      .map((el, i) => el.value.trim() ? `  ${i+1}. ${el.value.trim()}` : null)
+      .filter(Boolean).join('\n');
+  }
+
+  function getHashtags() {
+    return Array.from(document.querySelectorAll('#hashtagsWrap .tag'))
+      .map(el => el.textContent.replace('×','').trim()).join(' ');
+  }
+
+  function getPecas() {
+    return Array.from(document.querySelectorAll('.peca-item'))
+      .filter(el => el.querySelector('input').checked)
+      .map(el => `  ✓ ${el.querySelector('.peca-nome').textContent} (${el.querySelector('.peca-dim').textContent})`)
+      .join('\n');
+  }
+
+  function gerarResumo() {
+    const wrap = document.getElementById('resumoWrap');
+    const body = document.getElementById('resumoBody');
+
+    const mes = document.getElementById('mes').value || '—';
+    const nome = document.getElementById('nomeCampanha').value || '—';
+    const cor = corInput.value;
+    const causa = document.getElementById('causa').value || '—';
+    const mote = document.getElementById('mote').value || '—';
+    const chamada = document.getElementById('chamada').value || '—';
+    const assinatura = document.getElementById('assinatura').value || '—';
+    const fraseApoio = document.getElementById('fraseApoio').value || '—';
+    const textoInst = document.getElementById('textoInstitucional').value || '—';
+    const dicas = getDicas() || '  —';
+    const abertura = document.getElementById('legendaAbertura').value || '—';
+    const desenv = document.getElementById('legendaDesenv').value || '—';
+    const fecho = document.getElementById('legendaFecho').value || '—';
+    const hashtags = getHashtags() || '—';
+    const pecas = getPecas() || '  —';
+    const obs = document.getElementById('obs').value || '—';
+
+    body.innerHTML = `<strong>━━ BRIEFING: ${nome.toUpperCase()} ━━</strong>
+
+<strong>1. IDENTIDADE</strong>
+Mês: ${mes}
+Campanha: ${nome}
+Cor: ${cor}
+Causa: ${causa}
+
+<strong>2. TEXTOS CONCEITUAIS</strong>
+Mote: "${mote}"
+Chamada principal: ${chamada}
+Assinatura: ${assinatura}
+Frase de apoio: ${fraseApoio}
+
+<strong>3. TEXTO INSTITUCIONAL (Banner)</strong>
+${textoInst}
+
+<strong>4. DICAS DE PREVENÇÃO</strong>
+${dicas}
+
+<strong>5. LEGENDA DO POST</strong>
+[Abertura]
+${abertura}
+
+[Desenvolvimento]
+${desenv}
+
+[Fechamento]
+${fecho}
+
+<strong>6. HASHTAGS</strong>
+${hashtags}
+
+<strong>7. PEÇAS DO ENXOVAL</strong>
+${pecas}
+
+<strong>8. OBSERVAÇÕES</strong>
+${obs}
+
+<strong>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</strong>
+Revenda Solimões | Gerado via Briefing Meses Coloridos`;
+
+    wrap.style.display = 'block';
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copiarResumo() {
+    const text = document.getElementById('resumoBody').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.btn-copiar');
+      btn.textContent = 'Copiado!';
+      setTimeout(() => btn.textContent = 'Copiar texto', 2000);
+    });
+  }
+
+  function limparForm() {
+    if (!confirm('Limpar todos os campos?')) return;
+    document.querySelectorAll('input[type=text], textarea, select').forEach(el => el.value = '');
+    corInput.value = '#f5c518';
+    atualizarCor();
+    document.querySelectorAll('.peca-item input[type=checkbox]').forEach(el => el.checked = true);
+    document.querySelectorAll('#hashtagsWrap .tag:not(.tag-fixa)').forEach(el => el.remove());
+    document.getElementById('resumoWrap').style.display = 'none';
+  }
+</script>
+</body>
+</html>
